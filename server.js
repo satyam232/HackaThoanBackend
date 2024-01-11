@@ -18,22 +18,37 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 // Connect to MongoDB
-mongoose.connect('mongodb://0.0.0.0:27017/Hackathon', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+// mongoose.connect('mongodb://0.0.0.0:27017/Hackathon', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// })
+//   .then(() => {
+//     console.log('MongoDB connected');
+//   })
+//   .catch((error) => {
+//     console.error('MongoDB connection error:', error);
+//   });
+
+mongoose.connect(process.env.MONGODB_CONNECT_URI)
+.then(() => {
+console.log('MongoDB is connected');
+}).catch((error) => {
+console.error('MongoDB connection error:', error);
 })
-  .then(() => {
-    console.log('MongoDB connected');
-  })
-  .catch((error) => {
-    console.error('MongoDB connection error:', error);
-  });
+
 
 // Routes
 app.use('/api', UserRoutes);
 
 // Start the server
-const port = 5000;
-app.listen(port, () => {
-  console.log(`Server started on http://localhost:${port}`);
-});
+// const port = 5000;
+// app.listen(port, () => {
+//   console.log(`Server started on http://localhost:${port}`);
+// });
+
+
+const PORT=process.env.PORT;
+
+app.listen(PORT,()=>{
+    console.log(`server is running in the port ${PORT}`)
+})
