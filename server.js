@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //     console.error('MongoDB connection error:', error);
 //   });
 
-mongoose.connect(process.env.MONGODB_CONNECT_URI)
+mongoose.connect("mongodb+srv://satyamr232:shibanee79@cluster0.dgdb3ju.mongodb.net/Hackathon?retryWrites=true&w=majority")
 .then(() => {
 console.log('MongoDB is connected');
 }).catch((error) => {
