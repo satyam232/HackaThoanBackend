@@ -2,6 +2,7 @@ const Users = require('../model/userModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const userModel = require('../model/userModel');
+const doctorModel = require('../model/Doctors');
 const util = require('util');
 
 
@@ -31,7 +32,7 @@ exports.createUser = async (req, res) => {
         await newUser.save();
         const token = jwt.sign({ UserId: newUser._id }, 'Ranashibanee1234', { expiresIn: '5d' });
 
-        return res.status(201).json({ message: 'User registered successfully', token });
+        return res.status(200).json({ message: 'User registered successfully', token });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'Internal Server Error' });
@@ -42,10 +43,16 @@ exports.createUser = async (req, res) => {
 
 exports.signIn = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { email, password, userType } = req.body;
 
         // Find the user by email
-        const user = await Users.findOne({ email });
+        let user;
+        if(userType==="doctor"){
+            user = await doctorModel.findOne({ email });
+        }else{
+            user= await userModel.findOne({ email });
+        }
+        
 
         // Check if the user exists
         if (!user) {
@@ -58,7 +65,7 @@ exports.signIn = async (req, res) => {
         if (passwordMatch) {
             // Generate a JWT token
             const token = jwt.sign({ Userid:user._id}, 'Ranashibanee1234',{expiresIn: '5d'});
-            res.status(200).json({ "status": 'Login Successful','token':token});
+            res.status(200).json({ "status": 'Login Successful','userType':userType,'token':token});
         } else {
             res.status(401).json({ error: 'Invalid email or password' });
         }

@@ -12,6 +12,7 @@ const UserDetails = new Schema({
     name: { type: String, required: true },
     age: { type: String, required: true },
     phoneno: { type: String, required: true },
+    imageUrl: { type: String, default:''},
     address: { type: Address }
 });
 

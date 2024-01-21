@@ -12,7 +12,7 @@ const createComment = async (req, res) => {
 
         await newComment.save();
 
-        return res.status(201).json({ message: 'Comment created successfully', comment: newComment });
+        return res.status(200).json({ message: 'Comment created successfully', comment: newComment });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'Internal Server Error' });
