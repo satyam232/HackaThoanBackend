@@ -2,10 +2,11 @@ const CommentModel = require('../model/ChatModel');  // Adjust the path as neede
 
 const createComment = async (req, res) => {
     try {
-        const { userId, name, message } = req.body;
+        const { userId,category, name, message } = req.body;
 
         const newComment = new CommentModel({
             userId,
+            category,
             name,
             message,
         });

@@ -11,8 +11,9 @@ var checkUserAuth = async (req, res, next) => {
             // verify token
             const { Userid } = jwt.verify(token, 'Ranashibanee1234');
             // get user from token
+            
             req.user = await userModel.findById(Userid).select('-password');
-            next(); // Call next() to proceed to the next middleware or route handler
+            next(); // 
         } catch (err) {
             res.status(401).send({ "status": "Unauthorized user" });
         }

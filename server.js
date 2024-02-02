@@ -42,7 +42,7 @@ io.on('connection', (socket) => {
 
 });
 
-mongoose.connect(process.env.MONGODB_CONNECT_URI, {
+mongoose.connect('mongodb://0.0.0.0:27017/Hackathon', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -57,7 +57,7 @@ mongoose.connect(process.env.MONGODB_CONNECT_URI, {
 app.use('/api', UserRoutes);
 
 // Start the server
-const PORT = process.env.PORT || 8080;
+const PORT = 8080;
 server.listen(PORT, () => {
   console.log(`Server started on http://localhost:${PORT}`);
 });
