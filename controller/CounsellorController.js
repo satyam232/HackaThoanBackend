@@ -54,7 +54,7 @@ exports.signIn = async (req, res) => {
         const passwordMatch = await bcrypt.compare(password, user.password);
         
         if (passwordMatch) {
-            const token = jwt.sign({ Userid:user._id}, 'Ranashibanee1234',{expiresIn: '5d'});
+            const token = jwt.sign({ Userid:user._id}, 'Ranashibanee1234',{expiresIn: '1y'});
             res.status(200).json({ "status": 'Login Successful','token':token,'sId':user._id});
         } else {
             res.status(401).json({ error: 'Invalid email or password' });
