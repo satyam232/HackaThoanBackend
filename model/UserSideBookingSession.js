@@ -9,5 +9,4 @@ const UserSideBookSession=new Schema({
     date:{type:String,required:true}
 });
 
-
 module.exports=model('UserSideBookedSession',UserSideBookSession)

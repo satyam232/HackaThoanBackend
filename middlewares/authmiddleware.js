@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const userModel = require('../model/userModel');
+const userModel = require('../model/Counselors');
 
 var checkUserAuth = async (req, res, next) => {
     let token;
@@ -15,7 +15,7 @@ var checkUserAuth = async (req, res, next) => {
             req.user = await userModel.findById(Userid).select('-password');
             next(); // 
         } catch (err) {
-            res.status(401).send({ "status": "Unauthorized user" });
+            res.status(401).send({ "status": "Unauthorized user","Userid":UserId});
         }
     }
 

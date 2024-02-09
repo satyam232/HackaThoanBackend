@@ -7,6 +7,7 @@ const ChatController = require('../controller/ChatController');
 const SessionController = require('../controller/AllSessionsController');
 const uploadController = require('../controller/imageUploadController');
 const BookingSessionController=require('../controller/BookSessionController')
+const counsellorController=require('../controller/CounsellorController');
 
 // Middleware usage
 router.use('/comment', userauth);
@@ -14,6 +15,7 @@ router.use('/getuser', userauth);
 router.use('/getallusers', userauth);
 router.use('/sessions', userauth);
 router.use('/getDoctors', userauth);
+router.use('/counselorUpdatePassword',userauth);
 
 // Public routes
 router.post('/signup', UserController.createUser);
@@ -23,7 +25,6 @@ router.get('/getImage/:userId', uploadController.getImage);
 
 // Protected routes
 router.get('/getuser', UserController.getUser);
-
 router.get('/getallusers', UserController.getAllUsers);
 router.post('/comment', ChatController.createComment);
 router.get('/comment', ChatController.getAllComments);
@@ -34,8 +35,10 @@ router.post('/bookSession',BookingSessionController.CreateBookkingSession);
 router.get('/bookSession',BookingSessionController.GetBookingSession);
 router.post('/bookUserSession',BookingSessionController.UserSideBookingSessionCreate);
 router.get('/bookUserSession',BookingSessionController.UserSideBookingSessionGet);
-
 router.post('/uploads', uploadController.uploadImage);
+router.post('/counselorSignup',counsellorController.createCounsellor);
+router.post('/counselorLogin',counsellorController.signIn);
+router.post('/counselorUpdatePassword',counsellorController.updatePassword);
 
 
 module.exports = router;
