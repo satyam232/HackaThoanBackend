@@ -65,7 +65,7 @@ exports.signIn = async (req, res) => {
         if (passwordMatch) {
             // Generate a JWT token
             const token = jwt.sign({ Userid:user._id}, 'Ranashibanee1234',{expiresIn: '5d'});
-            res.status(200).json({ "status": 'Login Successful','userType':userType,'token':token,'name':user.userDetails.name});
+            res.status(200).json({ "status": 'Login Successful','userType':userType,'token':token,'name':user.userDetails.name,'sId':user._id});
         } else {
             res.status(401).json({ error: 'Invalid email or password' });
         }
